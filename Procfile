@@ -1,1 +1,1 @@
-web: python shiori.py
+web: python main.py
