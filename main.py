@@ -78,7 +78,7 @@ async def on_message(message):
 
         def get_weekday(yyyy,mm,dd):
             wey = datetime.datetime(yyyy,mm,dd)
-            w_list = ['（月）', '（火）', '（水）', '（木）', '（金）', '（土）', '（日）']
+            w_list = ['〈月〉', '〈火〉', '〈水〉', '〈木〉', '〈金〉', '〈土〉', '〈日〉']
             return(w_list[wey.weekday()])
 
 
