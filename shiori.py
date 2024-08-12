@@ -37,7 +37,7 @@ async def on_message(message):
             await message.reply(dice_num)
 
 # 次の活動日設定
-    if client.user in message.mentions: # 話しかけられたかの判定
+    if message.content.startswith("/next"): # 話しかけられたかの判定
         def daydelta(x):
             return datetime.timedelta(days=x)
         def weekdelta(x):
@@ -89,7 +89,7 @@ async def on_message(message):
             return(w_list[wey.weekday()])
 
 
-        naiyou = message.clean_content.replace("@シオリ","").strip()
+        naiyou = message.clean_content.replace("/next","").strip()
         aruyou = [naiyou]
         for t in aruyou:
             month, day = slice_date(t)
