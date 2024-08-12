@@ -6,16 +6,17 @@ import datetime
 import re
 import locale
 from discord.ext import commands
-from discord.app_commands import CommandTree
+from discord_slash import SlashCommand, SlashContext
 import random
 
 
 intents = discord.Intents.default()
 intents.message_content = True
-bot = commands.Bot(command_prefix='!', intents=intents)
-client = discord.Client(intents=intents)
+bot = discord.Client(intents_discord.Intents.all())
 
-@client.event
+slash_client = SlashCommand(bot, sync_commands=True)
+
+@bot.event
 async def on_ready():
     # 起動したらターミナルにログイン通知が表示される
     print('ログインしました')
@@ -28,15 +29,16 @@ async def rename_channel(message, yoteibi):
     edit_channel = await category.edit(name=yoteibi)
     return edit_channel
 
-@client.event
-async def on_message(message):
 # ランダムダイス
-    if message.content.startswith("/dice"):
+@slash_client.slash(name="dice", description="サイコロ、振ってあげます...！")
+async def dice(ctx: SlashContext):
             num_random = random.randrange(1,99)
-            dice_num = str(num_random)
-            await message.reply(dice_num)
+            dice_result = str(num_random) + ' です...！'
+            await ctx.send(content=dice_result)
 
 # 次の活動日設定
+@bot.event
+async def on_message(message):
     if client.user in message.mentions: # 話しかけられたかの判定
         def daydelta(x):
             return datetime.timedelta(days=x)
@@ -102,4 +104,4 @@ async def on_message(message):
             text = '次の活動日は ' + yoteibi + ' ですね。'
             await message.channel.send(text)
 
-client.run(os.environ["DISCORD_TOKEN"])
+bot.run(os.environ["DISCORD_TOKEN"])
