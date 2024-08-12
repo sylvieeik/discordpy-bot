@@ -35,9 +35,8 @@ async def on_message(message):
             dice_num = str(num_random)
             await message.reply(dice_num)
 
-    if client.user in message.mentions: # 話しかけられたかの判定
-
 # 次の活動日設定
+    if client.user in message.mentions: # 話しかけられたかの判定
         def daydelta(x):
             return datetime.timedelta(days=x)
         def weekdelta(x):
@@ -45,10 +44,10 @@ async def on_message(message):
 
     # UCTから時差を調整
         d_now_jp = datetime.datetime.now() + datetime.timedelta(hours=9)
-        d_today = d_now_jp.date()
-        tomorrow = d_today + daydelta(1)
-        afmorrow = d_today + daydelta(2)
-        dfmorrow = d_today + daydelta(3)
+#        d_today = d_now_jp.date()
+#        tomorrow = d_today + daydelta(1)
+#        afmorrow = d_today + daydelta(2)
+#        dfmorrow = d_today + daydelta(3)
         year = tomorrow.year
 
         def datesearch(moji):
@@ -59,20 +58,20 @@ async def on_message(message):
 
         def slice_date(d):
             date = datesearch(d)
-            kyou = re.match('(きょう|今日)\s\S+',d)
-            ashita = re.match('(あした|あす|明日)\s\S+',d)
-            asatte = re.match('(あさって|明後日)\s\S+',d)
-            shiasatte = re.match('(しあさって|明々後日)\s\S+',d)
+#            kyou = re.match('(きょう|今日)\s\S+',d)
+#            ashita = re.match('(あした|あす|明日)\s\S+',d)
+#            asatte = re.match('(あさって|明後日)\s\S+',d)
+#            shiasatte = re.match('(しあさって|明々後日)\s\S+',d)
             if date:
                 return date.group(1, 2)
-            elif kyou:
-                return datesearch(d_today.strftime('%m/%d ')).group(1, 2)
-            elif ashita:
-                return datesearch(tomorrow.strftime('%m/%d ')).group(1, 2)
-            elif asatte:
-                return datesearch(afmorrow.strftime('%m/%d ')).group(1, 2)
-            elif shiasatte:
-                return datesearch(dfmorrow.strftime('%m/%d ')).group(1, 2)
+#            elif kyou:
+#                return datesearch(d_today.strftime('%m/%d ')).group(1, 2)
+#            elif ashita:
+#                return datesearch(tomorrow.strftime('%m/%d ')).group(1, 2)
+#            elif asatte:
+#                return datesearch(afmorrow.strftime('%m/%d ')).group(1, 2)
+#            elif shiasatte:
+#                return datesearch(dfmorrow.strftime('%m/%d ')).group(1, 2)
             else:
                 return [-1] * 2
 
