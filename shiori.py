@@ -29,8 +29,6 @@ async def rename_channel(message, yoteibi):
 
 @client.event
 async def on_message(message):
-    if message.author.bot: # 送信者がbotである場合は弾く
-        return
 # ランダムダイス
     if message.content.startswith("/dice"):
             num_random = random.randrange(1,99)
