@@ -104,6 +104,6 @@ async def on_message(message):
         if client.user != message.author:
             num_random = random.randrange(1,99)
             dice_num = str(num_random)
-            await client.send_message(message.channel, dice_num)
+            await message.reply(dice_num)
 
 client.run(os.environ["DISCORD_TOKEN"])
