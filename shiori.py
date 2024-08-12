@@ -6,6 +6,7 @@ import datetime
 import re
 import locale
 from discord.ext import commands
+from discord.app_commands import CommandTree
 import random
 
 
@@ -44,8 +45,8 @@ async def on_message(message):
 
     # UCTから時差を調整
         d_now_jp = datetime.datetime.now() + datetime.timedelta(hours=9)
-#        d_today = d_now_jp.date()
-#        tomorrow = d_today + daydelta(1)
+        d_today = d_now_jp.date()
+        tomorrow = d_today + daydelta(1)
 #        afmorrow = d_today + daydelta(2)
 #        dfmorrow = d_today + daydelta(3)
         year = tomorrow.year
