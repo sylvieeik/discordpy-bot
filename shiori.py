@@ -33,7 +33,7 @@ async def on_message(message):
 # ランダムダイス
     if message.content.startswith("/dice"):
             num_random = random.randrange(1,99)
-            dice_num = str(num_random)
+            dice_num = str(num_random) + "...です！"
             await message.reply(dice_num)
 
 # 次の活動日設定
@@ -99,7 +99,7 @@ async def on_message(message):
 
             await rename_channel(message, yoteibi)
 
-            text = '次の活動日は ' + yoteibi + ' ですね。'
+            text = '次の活動日は ' + yoteibi + ' です...！'
             await message.channel.send(text)
 
 client.run(os.environ["DISCORD_TOKEN"])
