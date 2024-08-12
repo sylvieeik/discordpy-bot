@@ -6,7 +6,7 @@ import datetime
 import re
 import locale
 from discord.ext import commands
-import numpy as np
+import random
 
 
 intents = discord.Intents.default()
@@ -100,46 +100,10 @@ async def on_message(message):
             await message.channel.send(text)
 
 # ランダムダイス
-
-    elif re.match(r'/dice .*', message.content):
-        content = message.content.replace('/dice ', '')
-        splitPlus = content.split('+')
-        formatedContent = content.replace(' ', '').replace('+', ' + ')
-        reply = message.author
-
-        response = formatedContent + ": "
-
-        result = 0
-        for (i, context) in enumerate(splitPlus):
-          splited = context.split('d')
-
-          if len(splited) == 1:
-            result = result + int(splited[0])
-            response = response + splited[0]
-          else:
-            for dice in range(int(splited[0])):
-              res = np.random.randint(1, splited[1])
-              result = result + res
-              response = response + str(res)
-
-              # ダイスが1個以上の時
-              if not (int(splited[0]) == 1):
-                # 最後のダイスじゃない時
-                if not ((dice == (int(splited[0]) - 1))):
-                  response = response + " + "
-                # 最後のダイスかつ、ダイスセットが１つだけの時
-                elif (dice == int(splited[0]) - 1) and (len(splitPlus) == 1):
-                  response = response + " = " + str(result)
-
-          # ダイスセットが1個以上の時
-          if not (len(splitPlus) == 1):
-            # 最後のダイスセットじゃない時
-            if not (i == (len(splitPlus) - 1)):
-              response = response + " + "
-            # 最後のダイスセットの時
-            elif (i == len(splitPlus) - 1):
-              response = response + " = " + str(result)
-
-        await message.reply(response, mention_author=True)
+    if message.content.startswith("/dice")
+        if client.user != message.author:
+            num_random = random.randrange(1,99)
+            dice_num = str(num_random)
+            await client.send_message(message.channel, dice_num)
 
 client.run(os.environ["DISCORD_TOKEN"])
