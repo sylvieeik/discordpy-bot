@@ -31,6 +31,11 @@ async def rename_channel(message, yoteibi):
 async def on_message(message):
     if message.author.bot: # 送信者がbotである場合は弾く
         return
+# ランダムダイス
+    if message.content.startswith("/dice"):
+            num_random = random.randrange(1,99)
+            dice_num = str(num_random)
+            await message.reply(dice_num)
 
     if client.user in message.mentions: # 話しかけられたかの判定
 
@@ -98,12 +103,5 @@ async def on_message(message):
 
             text = '次の活動日は ' + yoteibi + ' ですね。'
             await message.channel.send(text)
-
-# ランダムダイス
-    elif message.content.startswith("/dice"):
-        if client.user != message.author:
-            num_random = random.randrange(1,99)
-            dice_num = str(num_random)
-            await message.reply(dice_num)
 
 client.run(os.environ["DISCORD_TOKEN"])
