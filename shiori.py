@@ -100,7 +100,7 @@ async def on_message(message):
             await message.channel.send(text)
 
 # ランダムダイス
-    if message.content.startswith("/dice"):
+    elif message.content.startswith("/dice"):
         if client.user != message.author:
             num_random = random.randrange(1,99)
             dice_num = str(num_random)
