@@ -2,7 +2,7 @@
 
 import os
 import discord
-import datetime
+from datetime import datetime, timedelta
 import re
 import locale
 from discord.ext import commands
@@ -38,18 +38,18 @@ async def on_message(message):
 
 # 次の活動日設定
     if message.content.startswith("/next"): # 話しかけられたかの判定
-        def daydelta(x):
-            return datetime.timedelta(days=x)
-        def weekdelta(x):
-            return datetime.timedelta(weeks=x)
+#        def daydelta(x):
+#            return datetime.timedelta(days=x)
+#        def weekdelta(x):
+#            return datetime.timedelta(weeks=x)
 
     # UCTから時差を調整
-        d_now_jp = datetime.datetime.now() + datetime.timedelta(hours=9)
-        d_today = d_now_jp.date()
-        tomorrow = d_today + daydelta(1)
+        d_now_jp = datetime.now() + timedelta(hours=9)
+#        d_today = d_now_jp.date()
+#        tomorrow = d_today + daydelta(1)
 #        afmorrow = d_today + daydelta(2)
 #        dfmorrow = d_today + daydelta(3)
-        year = tomorrow.year
+#        year = tomorrow.year
 
         def datesearch(moji):
             return re.search('(\d{1,2})\D(\d{1,2})\s',moji)
@@ -84,7 +84,7 @@ async def on_message(message):
                 return [-1] * 2
 
         def get_weekday(yyyy,mm,dd):
-            wey = datetime.datetime(yyyy,mm,dd)
+            wey = datetime(yyyy,mm,dd)
             w_list = ['〈月〉', '〈火〉', '〈水〉', '〈木〉', '〈金〉', '〈土〉', '〈日〉']
             return(w_list[wey.weekday()])
 
@@ -94,7 +94,7 @@ async def on_message(message):
         for t in aruyou:
             month, day = slice_date(t)
             hour, minute = slice_time(t)
-            weekday = get_weekday(int(year), int(month), int(day))
+            weekday = get_weekday(int(d_now_jp.year), int(month), int(day))
             yoteibi = month + "月" + day + "日" + weekday + hour + ":" + minute
 
             await rename_channel(message, yoteibi)
