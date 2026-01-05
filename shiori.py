@@ -2,7 +2,7 @@
 
 import os
 import discord
-from datetime import datetime, timedelta
+import datetime
 import re
 import locale
 from discord.ext import commands
@@ -44,7 +44,7 @@ async def on_message(message):
 #            return datetime.timedelta(weeks=x)
 
     # UCTから時差を調整
-        d_now_jp = datetime.now() + timedelta(hours=9)
+        d_now_jp = datetime.datetime.now() + datetime.timedelta(hours=9)
 #        d_today = d_now_jp.date()
 #        tomorrow = d_today + daydelta(1)
 #        afmorrow = d_today + daydelta(2)
@@ -84,7 +84,7 @@ async def on_message(message):
                 return [-1] * 2
 
         def get_weekday(yyyy,mm,dd):
-            wey = datetime(yyyy,mm,dd)
+            wey = datetime.datetime(yyyy,mm,dd)
             w_list = ['〈月〉', '〈火〉', '〈水〉', '〈木〉', '〈金〉', '〈土〉', '〈日〉']
             return(w_list[wey.weekday()])
 
@@ -103,3 +103,4 @@ async def on_message(message):
             await message.channel.send(text)
 
 client.run(os.environ["DISCORD_TOKEN"])
+
