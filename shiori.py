@@ -94,7 +94,7 @@ async def on_message(message):
         for t in aruyou:
             month, day = slice_date(t)
             hour, minute = slice_time(t)
-            weekday = get_weekday(int(d_now_jp.year), int(month), int(day))
+            weekday = get_weekday(d_now_jp.year, int(month), int(day))
             yoteibi = month + "月" + day + "日" + weekday + hour + ":" + minute
 
             await rename_channel(message, yoteibi)
@@ -103,4 +103,5 @@ async def on_message(message):
             await message.channel.send(text)
 
 client.run(os.environ["DISCORD_TOKEN"])
+
 
