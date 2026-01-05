@@ -35,7 +35,10 @@ async def on_message(message):
             num_random = random.randrange(1,99)
             dice_num = str(num_random) + "...です！"
             await message.reply(dice_num)
-
+#あけおめ
+    if message.content.startswith("/akeome"):
+            akeome = "あけまして...おめでとうございます...！"
+            await message.reply(akeome)
 # 次の活動日設定
     if message.content.startswith("/next"): # 話しかけられたかの判定
 #        def daydelta(x):
@@ -103,5 +106,6 @@ async def on_message(message):
             await message.channel.send(text)
 
 client.run(os.environ["DISCORD_TOKEN"])
+
 
 
